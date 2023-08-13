@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { Modal, Group } from "@mantine/core";
 import { Link } from "react-router-dom";
-import "./index.css"
+import "./index.css";
 
 export default function ManageTask() {
   // modal
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [date_end, setDate_end] = useState("");
-
 
   const submitForm = () => {
     let tasks = JSON.parse(localStorage.getItem("tasks"));
@@ -25,11 +24,10 @@ export default function ManageTask() {
     });
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    setTitle(""); 
-    setDate(""); 
-    setDate_end(""); 
+    setTitle("");
+    setDate("");
+    setDate_end("");
     window.location.reload();
-
   };
   // modal
 
@@ -77,30 +75,30 @@ export default function ManageTask() {
                     }}
                   />
                   <div className="date">
-                  <label for="task-date" className="form-label">
-                    Date Start
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    id="task-date"
-                    value={date}
-                    onChange={(event) => {
-                      setDate(event.target.value);
-                    }}
-                  />
-                  <label for="task-date" className="form-label">
-                    Date End
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    id="task-date"
-                    value={date_end}
-                    onChange={(event) => {
-                      setDate_end(event.target.value);
-                    }}
-                  />
+                    <label for="task-date" className="form-label">
+                      Date Start
+                    </label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      id="task-date"
+                      value={date}
+                      onChange={(event) => {
+                        setDate(event.target.value);
+                      }}
+                    />
+                    <label for="task-date" className="form-label">
+                      Date End
+                    </label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      id="task-date"
+                      value={date_end}
+                      onChange={(event) => {
+                        setDate_end(event.target.value);
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="text-end">
@@ -144,13 +142,14 @@ export default function ManageTask() {
                   return (
                     <tr key={task.id}>
                       <td>{task.title}</td>
-                      <td>{task.date} - {task.date_end}</td>
+                      <td>
+                        {task.date} - {task.date_end}
+                      </td>
                       <td>
                         <span className="badge bg-warning">{task.status}</span>
                       </td>
                       <td className="text-end">
                         <div className="buttons">
-                          
                           <Link
                             to={`/manage-tasks-edit/${task.id}`}
                             className="btn btn-secondary btn-sm me-2"
@@ -175,11 +174,11 @@ export default function ManageTask() {
         </table>
       </div>
       <div className="text-center">
-      <div className="frame">
-        <Link to="/">
-          <button className="custom-btn btn-8 text-dark">Back</button>
-        </Link>
-      </div>
+        <div className="frame">
+          <Link to="/">
+            <button className="custom-btn btn-8 text-dark">Back</button>
+          </Link>
+        </div>
       </div>
     </div>
   );
