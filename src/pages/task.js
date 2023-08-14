@@ -21,7 +21,7 @@ export default function Task() {
   useEffect(() => {
     const list = JSON.parse(localStorage.getItem("list"));
     if (list) {
-      const filteredList = list.filter(item => item.taskId === id);
+      const filteredList = list.filter((item) => item.taskId === id);
       setList(filteredList);
     }
   }, [id]);
@@ -33,7 +33,7 @@ export default function Task() {
   useEffect(() => {
     const list2 = JSON.parse(localStorage.getItem("list2"));
     if (list2) {
-      const filteredList2 = list2.filter(item => item.taskId === id);
+      const filteredList2 = list2.filter((item) => item.taskId === id);
       setList2(filteredList2);
     }
   }, [id]);
@@ -45,7 +45,7 @@ export default function Task() {
   useEffect(() => {
     const list3 = JSON.parse(localStorage.getItem("list3"));
     if (list3) {
-      const filteredList3 = list3.filter(item => item.taskId === id);
+      const filteredList3 = list3.filter((item) => item.taskId === id);
       setList3(filteredList3);
     }
   }, [id]);
@@ -58,7 +58,7 @@ export default function Task() {
 
   if (!task) return "task no found";
 
-  const {title = "", date = "", date_end = "", status } = task;
+  const { title = "", date = "", date_end = "", status } = task;
 
   const addList = () => {
     const newList = [...list];
@@ -71,7 +71,7 @@ export default function Task() {
     });
 
     setList(newList);
-    console.log(newList)
+    console.log(newList);
     localStorage.setItem("list", JSON.stringify(newList));
 
     setInput("");
@@ -85,7 +85,6 @@ export default function Task() {
       text: input2,
       isCompleted: false,
       taskId: id,
-
     });
 
     setList2(newList2);
@@ -102,7 +101,6 @@ export default function Task() {
       text: input3,
       isCompleted: false,
       taskId: id,
-
     });
 
     setList3(newList3);

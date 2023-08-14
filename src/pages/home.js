@@ -1,8 +1,25 @@
 import { Link } from "react-router-dom";
 import "./index.css";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { TextInput } from "@mantine/core";
 
 export default function Home() {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const [keywords, setKeywords] = useState("");
+  const [incomeList, setIncomeList] = useState([]);
+  const [filter, setFilter] = useState("");
+
+  const filteredList = useMemo(() => {
+    return incomeList.filter(
+      (i) => i.name.toLowerCase().indexOf(keywords.toLowerCase()) >= 0
+    );
+  }, [filter, incomeList, keywords]);
+
   return (
     <div className="container mx-auto my-5">
       <h1 className="h1 mb-4 text-center">My Task</h1>
