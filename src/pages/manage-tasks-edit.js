@@ -132,9 +132,9 @@ export default function ManageTasksEdit() {
           </div>
         </form>
       </div>
-      <div className="text-center">
-        <Link to="/manage-tasks" className="btn btn-link btn-sm">
-          <i className="bi bi-arrow-left"></i> Back to tasks
+      <div className="frame">
+        <Link to="/manage-tasks">
+          <button className="custom-btn btn-9">Back to tasks</button>
         </Link>
       </div>
     </div>

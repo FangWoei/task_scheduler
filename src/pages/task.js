@@ -2,7 +2,6 @@ import { Link, useParams } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import { nanoid } from "nanoid";
 
-
 export default function Task() {
   const [input, setInput] = useState("");
   const [list, setList] = useState([]);
@@ -22,9 +21,10 @@ export default function Task() {
   useEffect(() => {
     const list = JSON.parse(localStorage.getItem("list"));
     if (list) {
-      setList(list);
+      const filteredList = list.filter(item => item.taskId === id);
+      setList(filteredList);
     }
-  }, []);
+  }, [id]);
 
   const noonListCount = useMemo(() => {
     return list2.length;
@@ -33,9 +33,10 @@ export default function Task() {
   useEffect(() => {
     const list2 = JSON.parse(localStorage.getItem("list2"));
     if (list2) {
-      setList2(list2);
+      const filteredList2 = list2.filter(item => item.taskId === id);
+      setList2(filteredList2);
     }
-  }, []);
+  }, [id]);
 
   const nightListCount = useMemo(() => {
     return list3.length;
@@ -44,9 +45,10 @@ export default function Task() {
   useEffect(() => {
     const list3 = JSON.parse(localStorage.getItem("list3"));
     if (list3) {
-      setList(list3);
+      const filteredList3 = list3.filter(item => item.taskId === id);
+      setList3(filteredList3);
     }
-  }, []);
+  }, [id]);
 
   const tasks = JSON.parse(localStorage.getItem("tasks"));
   let task = null;
@@ -56,7 +58,7 @@ export default function Task() {
 
   if (!task) return "task no found";
 
-  const { title = "", date = "", date_end = "", status } = task;
+  const {title = "", date = "", date_end = "", status } = task;
 
   const addList = () => {
     const newList = [...list];
@@ -65,9 +67,11 @@ export default function Task() {
       id: nanoid(),
       text: input,
       isCompleted: false,
+      taskId: id,
     });
 
     setList(newList);
+    console.log(newList)
     localStorage.setItem("list", JSON.stringify(newList));
 
     setInput("");
@@ -80,6 +84,8 @@ export default function Task() {
       id: nanoid(),
       text: input2,
       isCompleted: false,
+      taskId: id,
+
     });
 
     setList2(newList2);
@@ -95,6 +101,8 @@ export default function Task() {
       id: nanoid(),
       text: input3,
       isCompleted: false,
+      taskId: id,
+
     });
 
     setList3(newList3);
@@ -112,7 +120,6 @@ export default function Task() {
     }
   };
 
-  
   return (
     <div className="container mx-auto my-5">
       <h1 className="h1 mb-4 text-center">{title}</h1>
@@ -228,7 +235,7 @@ export default function Task() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Add new item..."
+                            placeholder="Add new task..."
                             value={input}
                             onChange={(event) => {
                               setInput(event.target.value);
@@ -325,7 +332,7 @@ export default function Task() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Add new item..."
+                            placeholder="Add new task..."
                             value={input2}
                             onChange={(event) => {
                               setInput2(event.target.value);
@@ -424,7 +431,7 @@ export default function Task() {
                           <input
                             type="text"
                             className="form-control"
-                            placeholder="Add new item..."
+                            placeholder="Add new task..."
                             value={input3}
                             onChange={(event) => {
                               setInput3(event.target.value);
@@ -527,7 +534,7 @@ export default function Task() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Add new item..."
+                        placeholder="Add new task..."
                         value={input}
                         onChange={(event) => {
                           setInput(event.target.value);
@@ -624,7 +631,7 @@ export default function Task() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Add new item..."
+                        placeholder="Add new task..."
                         value={input2}
                         onChange={(event) => {
                           setInput2(event.target.value);
@@ -721,7 +728,7 @@ export default function Task() {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Add new item..."
+                        placeholder="Add new task..."
                         value={input3}
                         onChange={(event) => {
                           setInput3(event.target.value);
@@ -744,9 +751,9 @@ export default function Task() {
           </div>
         </div>
       )}
-      <div className="text-center mt-3">
-        <Link to="/" className="btn btn-link btn-sm">
-          <i className="bi bi-arrow-left"></i> Back
+      <div className="frame">
+        <Link to="/">
+          <button className="custom-btn btn-9">Back</button>
         </Link>
       </div>
     </div>
